@@ -1,7 +1,7 @@
 # Programacion sobre Redes
 ## PFO1 - Chat
 
-1 - en una terminal ejecutar: 
+1 - en una terminal ejecutar:  
 python -m server.server
 
 2 - en otra terminal diferente ejecutar: 
