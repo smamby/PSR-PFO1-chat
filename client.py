@@ -20,8 +20,8 @@ def run_client():
             # Recibir la respuesta del servidor
             response = client_socket.recv(1024).decode('utf-8')
             print(f"Respuesta del servidor: {response}")
-    except KeyboardInterrupt:
-        print("\nCliente detenido.")
+    except ConnectionError as e:
+        print(f"Error de conexión: {e}")
     finally:
         client_socket.close()
         print("Conexión cerrada.")

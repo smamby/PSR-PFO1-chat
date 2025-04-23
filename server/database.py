@@ -23,7 +23,7 @@ def init_db():
 
 # Guardar un mensaje en la base de datos
 def save_message(content, ip_client):
-    datetime = datetime.now().strftime("%Y-%m-%D %H:%M:%S")
+    timestamp = datetime.now().strftime("%Y-%m-%D %H:%M:%S")
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
 
@@ -31,9 +31,9 @@ def save_message(content, ip_client):
     cursor.execute('''
         INSERT INTO messages (content, send_date, ip_client)
         VALUES (?, ?, ?)
-        ''', (content, datetime, ip_client)
+        ''', (content, timestamp, ip_client)
     )
 
     conn.commit()
     conn.close()
-    return datetime
+    return timestamp

@@ -10,7 +10,7 @@ def handler_client(conn, addr):
             # Recibir el mensaje del cliente
             message = conn.recv(1024).decode('utf-8')
             # si el mensaje es exit, cerrar la conexión
-            if message.lower() == 'exit':
+            if not message or message.lower() == 'exit':
                 print(f"Cliente {addr[0]}:{addr[1]} ha cerrado la conexión.")
                 break
             # Guardar el mensaje en la base de datos
@@ -30,23 +30,20 @@ def start_server():
     init_db()
     # Crear un socket TCP/IP
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server_socket.bind((HOST, PORT))
     server_socket.listen()
-    client_threads = []
     print(f"Servidor escuchando en {HOST}:{PORT}")
     try:
         while True:
             # Esperar a que un cliente se conecte
             conn, addr = server_socket.accept()
             # Crear un hilo para manejar al cliente
-            client_thread = threading.Thread(target=handler_client, args=(conn, addr))
+            client_thread = threading.Thread(target=handler_client, args=(conn, addr), daemon=True)
             client_thread.start()
-            client_threads.append(client_thread)
     except KeyboardInterrupt:
         print("Servidor detenido. Esperando que los hilos terminen...")
     finally:
-        for thread in client_threads:
-            thread.join()
         server_socket.close()
         print("Socket cerrado correctamente.")
 
