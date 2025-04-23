@@ -13,7 +13,7 @@ def init_db():
         CREATE TABLE IF NOT EXISTS messages (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             content TEXT NOT NULL,
-            send_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            sent_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             ip_client TEXT NOT NULL
         )
     ''')
@@ -29,7 +29,7 @@ def save_message(content, ip_client):
 
     # Insertar el mensaje en la base de datos
     cursor.execute('''
-        INSERT INTO messages (content, send_date, ip_client)
+        INSERT INTO messages (content, sent_date, ip_client)
         VALUES (?, ?, ?)
         ''', (content, timestamp, ip_client)
     )
