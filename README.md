@@ -1,11 +1,11 @@
 # Programacion sobre Redes
 ## PFO1 - Chat
 
-1 - en una terminal ejecutar:  
+1 - En una terminal ejecutar:  
 python -m server.server
 
-2 - en otra terminal diferente ejecutar:  
+2 - En otra terminal diferente ejecutar:  
 python client.py
 
-3 - probar base de datos:  
+3 - Probar base de datos:  
 python probar_database.py
