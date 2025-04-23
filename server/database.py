@@ -24,6 +24,7 @@ def init_db():
 # Guardar un mensaje en la base de datos
 def save_message(content, ip_client):
     timestamp = datetime.now().strftime("%Y-%m-%D %H:%M:%S")
+    print(f'prueba timestamp: {timestamp}')
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
 
